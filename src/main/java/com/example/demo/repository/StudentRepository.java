@@ -18,4 +18,8 @@ public class StudentRepository {
     public List<Student> getAllStudents(){
         return studentList;
     }
+
+    public void deleteAll(){
+        studentList = new ArrayList<>();
+    }
 }

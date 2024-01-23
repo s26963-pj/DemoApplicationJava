@@ -5,6 +5,8 @@ import com.example.demo.repository.StudentRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
@@ -13,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,6 +30,11 @@ class StudentControllerTest {
     private StudentRepository studentRepository;
     @Autowired
     private ObjectMapper objectMapper;
+
+    @BeforeEach
+    public void cleanUp(){
+        studentRepository.deleteAll();
+    }
 
     @Test
     void shouldSaveNewStudent() throws JsonProcessingException {
