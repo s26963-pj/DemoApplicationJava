@@ -5,6 +5,8 @@ import com.example.demo.repository.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class StudentService {
@@ -14,5 +16,8 @@ public class StudentService {
     public Student add(Student student){
 
         return studentRepository.addStudent(student);
+    }
+    public List<Student> getAllStudents(){
+        return studentRepository.getAllStudents();
     }
 }
