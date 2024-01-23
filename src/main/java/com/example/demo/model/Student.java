@@ -1,7 +1,9 @@
 package com.example.demo.model;
 
 import com.example.demo.exceptions.ValidationException;
+import lombok.Getter;
 
+@Getter
 public class Student {
     private static Integer id = 0;
     private Integer studentId;
