@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.exceptions.ValidationException;
 import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,6 +25,11 @@ class StudentServiceTest {
         Student result = assertDoesNotThrow(() -> studentService.add(student));
 
         assertEquals(result.getName(), student.getName());
+    }
+
+    @Test
+    void shouldThrowValidationException(){
+        assertThrows(ValidationException.class, () -> new Student("", ""));
     }
 
 }
