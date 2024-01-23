@@ -13,6 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -41,5 +43,20 @@ class StudentControllerTest {
                 .returnResult().getResponseBody();
 
         assertEquals(result.getName(), student.getName());
+    }
+
+    @Test
+    void shouldReturnAllStudents(){
+        Student student = new Student("Anna", "Anika");
+
+        studentRepository.addStudent(student);
+
+        List<Student> result = webTestClient.get().uri("/student")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBodyList(Student.class)
+                .returnResult().getResponseBody();
+
+        assertEquals(result.get(0).getName(), student.getName());
     }
 }
